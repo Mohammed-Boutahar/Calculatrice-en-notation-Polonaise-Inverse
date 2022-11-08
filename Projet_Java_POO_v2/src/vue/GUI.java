@@ -14,6 +14,7 @@ import javafx.scene.layout.*;
 public class GUI extends Application {
 	
 	Accumulateur a;
+	
 	Button button0;
 	Button button1;
 	Button button2;
@@ -24,16 +25,32 @@ public class GUI extends Application {
 	Button button7;
 	Button button8;
 	Button button9;
-	Label label3;
+
 	Button virgule;
 	Button buttonPush;
 	Button swap;
 	Button clear;
+	
 	Button somme;
 	Button soustr;
 	Button multip;
 	Button div;
+	Button square;
+	Button racine;
+	
 	Button inverse;
+	
+	Button keyboard;
+	
+	Label label0;
+	Label label1;
+	Label label2;
+	Label label3;
+	Label label4;
+	Label last_op;
+	Label last_op0;
+	Label counter;
+	Label counter0;
 
 	
 	@Override
@@ -42,14 +59,6 @@ public class GUI extends Application {
 			
 			AnchorPane root = new AnchorPane();
 			
-/*			VBox line1 = new VBox();
-			line1.setAlignment(Pos.TOP_CENTER);
-			
-			root.getChildren().add(line1);*/
-			
-			//Message dans le Panel :
-				//Label l = new Label ("Calculatrice polonaire");
-				//Scene scene = new Scene (new StackPane(l),400, 400);
 			
 			Scene scene = new Scene(root,350,400);
 			
@@ -69,16 +78,19 @@ public class GUI extends Application {
 			soustr = new Button("-");
 			multip = new Button("*");
 			div = new Button("/");
+			square = new Button("²");
+			racine = new Button("√");
 			inverse = new Button("+/-");
 			buttonPush = new Button("<>");
 			swap = new Button("Swap");
 			clear = new Button("Clear");
-
-
+			
+			keyboard = new Button("KeyBoard");
 
 			
-			root.getChildren().addAll(getButton0(),getButton1(),button2,button3,button4,button5,button6,button7,button8,button9,div,inverse,
-					multip,somme,soustr,buttonPush,virgule, clear, swap);
+			root.getChildren().addAll(getButton0(), getButton1(), button2,button3,button4,button5,button6,button7,button8,button9,div,inverse,
+					multip,somme,soustr,buttonPush,virgule, clear, swap, keyboard, square, racine);
+
 			
 			//Position bouton +
 		    AnchorPane.setBottomAnchor(somme, 150.0);
@@ -174,23 +186,51 @@ public class GUI extends Application {
 		    AnchorPane.setBottomAnchor(clear, 0.0);
 		    AnchorPane.setLeftAnchor(clear, 280.0);
 		    AnchorPane.setRightAnchor(clear, 10.0);
+		    
+		    //Position bouton keyboard
+		    AnchorPane.setBottomAnchor(keyboard, 190.0);
+		    AnchorPane.setLeftAnchor(keyboard, 10.0);
+		    AnchorPane.setRightAnchor(keyboard, 190.0);
+		    
+			//Position bouton square
+		    AnchorPane.setBottomAnchor(square, 190.0);
+		    AnchorPane.setLeftAnchor(square, 190.0);
+		    AnchorPane.setRightAnchor(square, 100.0);
+		    
+			//Position bouton racine
+		    AnchorPane.setBottomAnchor(racine, 190.0);
+		    AnchorPane.setLeftAnchor(racine, 280.0);
+		    AnchorPane.setRightAnchor(racine, 10.0);
 
 		    root.setStyle("-fx-background-color: pink");
 			
 			
-		    //Ajout de la zone texte où il y aura les elements de la pile
-		    Label label1 = new Label("texte 1");
-		    Label label2 = new Label("texte 2");
-		    setLabel3(new Label("Valeur en cours"));
-		    label1.relocate(280, 40);
-	        label2.relocate(280, 80);
-	        label3.relocate(250, 120);
-	        
-	        root.getChildren().addAll(label1,label2,label3);
+		    label4 = new Label("0");
+		    label3 = new Label("0");
+		    label2 = new Label("0");
+		    label1 = new Label("0");
+		    setLabel0(new Label("Valeur en cours"));
+		    counter = new Label("Nbr. élem. =");
+		    counter0 = new Label("0");
+		    last_op = new Label("Dern. Op.  =");
+		    last_op0 = new Label("");
+		    label4.relocate(20, 10);
+		    label3.relocate(20, 50);
+	        label2.relocate(20, 90);
+	        label1.relocate(20, 130);
+	        label0.relocate(20, 160);
+	        last_op.relocate(220, 60);
+	        last_op0.relocate(295, 60);
+	        counter.relocate(220, 10);
+	        counter0.relocate(295, 10);
+
+	        root.getChildren().addAll(label0, label2, label1, label3, label4, 
+	        		last_op, last_op0, counter, counter0);
 	        
 	        //Import controleur
-	        Controleur m = new Controleur(this);
-			stage.setTitle("Calculatrice Polonaise");
+	        Controleur c = new Controleur(this);
+	        
+			stage.setTitle("Calculatrice Polonaise inverse");
 			stage.setScene(scene);
 			stage.setResizable(false);
 			stage.centerOnScreen();
@@ -207,14 +247,97 @@ public class GUI extends Application {
 
 
 
-	//-------------------------------------------------------------------//
-	public Label getLabel3() {
-		return label3;
+	public Button getSquare() {
+		return square;
 	}
 
 
+
+	public void setSquare(Button square) {
+		this.square = square;
+	}
+
+
+
+	public Button getRacine() {
+		return racine;
+	}
+
+
+
+	public void setRacine(Button racine) {
+		this.racine = racine;
+	}
+
+
+
+	public Button getKeyboard() {
+		return keyboard;
+	}
+	public void setKeyboard(Button keyboard) {
+		this.keyboard = keyboard;
+	}
+
+	public Label getLabel4() {
+		return label4;
+	}
+	public void setLabel4(Label label4) {
+		this.label4 = label4;
+	}
+
+
+
+	public Label getLast_op0() {
+		return last_op0;
+	}
+	public void setLast_op0(Label last_op0) {
+		this.last_op0 = last_op0;
+	}
+
+
+
+	public Label getCounter0() {
+		return counter0;
+	}
+	public void setCounter0(Label counter0) {
+		this.counter0 = counter0;
+	}
+
+
+
+	public Label getLabel1() {
+		return label1;
+	}
+	public void setLabel1(Label label1) {
+		this.label1 = label1;
+	}
+
+
+
+	public Label getLabel2() {
+		return label2;
+	}
+	public void setLabel2(Label label2) {
+		this.label2 = label2;
+	}
+
+
+
+	public Label getLabel3() {
+		return label3;
+	}
 	public void setLabel3(Label label3) {
 		this.label3 = label3;
+	}
+
+
+
+	//-------------------------------------------------------------------//
+	public Label getLabel0() {
+		return label0;
+	}
+	public void setLabel0(Label Label0) {
+		this.label0 = Label0;
 	}
 
 // ----------++++----Launch----++++-------------
@@ -229,7 +352,6 @@ public class GUI extends Application {
 	public void setButton0(Button button0) {
 		this.button0 = button0;
 	}
-
 
 	public Button getButton1() {
 		return button1;
