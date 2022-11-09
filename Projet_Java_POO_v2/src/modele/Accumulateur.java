@@ -8,6 +8,7 @@ public class Accumulateur {
 		p = new Pile();
 	}
 	
+	//insérer un élément dans la pile 
 	public void push(float a) {
 		p.push(a); 
 	}
@@ -16,10 +17,10 @@ public class Accumulateur {
 		p.pop();
 	}
 	
-	public void clear() {
+	public void clear() { //vider la pile 
 		p.clear();
 	}
-	
+	//échange la position des deux derniers nombres de la pile 
 	public void swap() {
 		if (p.size()>1){
 			double n1= (Double)p.pop();
@@ -29,7 +30,7 @@ public class Accumulateur {
 		}
 	}
 		
-	
+	//effectue la négation du dernier nombre de la pile  
 	public void neg(){ 
 		double t1 = (Double)p.pop();
 		double t2 = -t1;
@@ -85,13 +86,14 @@ public class Accumulateur {
 		} 
 	}
 	
+	//effectue le carré des deux dernieres nombres de la pile
 	public void square() {
 		if (p.size()>=1){
 			double n1= (Double)p.pop();
 			p.push(n1*n1);
 		}
 	}
-	
+	//effectue la racine carrée du dernier nombre de la pile 
 	public void racine() {
 		if (p.size()>=1){
 			double n1= (Double)p.pop();

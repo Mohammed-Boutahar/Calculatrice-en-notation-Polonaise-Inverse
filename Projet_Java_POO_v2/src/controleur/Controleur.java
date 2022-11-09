@@ -1,7 +1,6 @@
 package controleur;
 
 import java.util.List;
-import java.util.Stack;
 
 import vue.GUI;
 import vue.IView;
@@ -12,10 +11,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import modele.Accumulateur;
 
-//import java.awt.event.KeyEvent;
-//import java.awt.event.KeyListener;
-//import java.awt.event.WindowEvent;
-//import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -26,6 +21,7 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 	String L = "";
 	int count = 0;
 	
+	//permet de mettre a jour l'affichage du GUI à partir des opérandes dans la pile p
 	public void Update_Pile() {
 		if(a.p.size()>=4) {
 			gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
@@ -52,6 +48,7 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 			gui.getLabel4().setText("0");
 		}
 	}
+	
 	
 	public Controleur(GUI gui) {
 		this.gui=gui;
@@ -124,7 +121,7 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 		
 
 		
-		//Button Push for entering values(operandes)
+		//Button Push for entering values(opérandes)
 		gui.getButtonPush().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			if(L=="") {
 				gui.getLabel0().setText("Entrez une valeur d'abord");
@@ -210,7 +207,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 			
 			Update_Pile();
 
-			
 			gui.getCounter0().setText("" + a.p.size());
 		});
 		
@@ -239,7 +235,7 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 			}
 		});
 		
-		
+		//permet de vider tous les elements (pile, liste, label...) qu'on est en train d'utiliser
 		gui.getClear().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			System.out.println("Cleared");
 			a.clear();
@@ -436,12 +432,55 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 					System.out.println(a.p.toString());
 					
 					Update_Pile();
-
 					
 					gui.getCounter0().setText("" + a.p.size());
 					gui.getLast_op0().setText("*");
 				}
 			});
+			
+			gui.getKeyboard().addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+				if (e.getCode() == KeyCode.C) {
+					if(a.p.size()>0) {
+						gui.getLast_op0().setText("²");
+						}
+					gui.getLabel0().setText("Valeur suivante");
+					a.square();
+					
+					Update_Pile();
+
+					gui.getCounter0().setText("" + a.p.size());
+				}
+			});
+			
+			gui.getKeyboard().addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+				if (e.getCode() == KeyCode.R) {
+					if(a.p.size()>0) {
+						gui.getLast_op0().setText("√");
+						}
+					gui.getLabel0().setText("Valeur suivante");
+					a.racine();
+					
+					Update_Pile();
+					
+					gui.getCounter0().setText("" + a.p.size());
+				}
+			});
+			
+			gui.getKeyboard().addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+				if (e.getCode() == KeyCode.W) {
+					if(a.p.size()==0) {
+						System.out.println("La pile est vide");
+					}
+					else {
+						System.out.println("Swaped");
+						a.swap();
+						System.out.println(a.p.toString());
+					}
+					Update_Pile();
+				}
+			});
+			
+
 			
 		//------------------------------Fin Opérations--------------------------//
 			
@@ -458,19 +497,44 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 					}
 				}
 			});
+			
+			gui.getKeyboard().addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+				if (e.getCode() == KeyCode.BACK_SPACE) {
+					System.out.println("Cleared");
+					a.clear();
+					gui.getLabel0().setText("Entrez une valeur");
+					gui.getLabel1().setText("0");
+					gui.getLabel2().setText("0");
+					gui.getLabel3().setText("0");
+					gui.getLabel4().setText("0");
+					gui.getCounter0().setText("0");
+					gui.getLast_op0().setText("");
+					L="";
+					count=0;
+					System.out.println(a.p.toString());
+				}});
 		
 			
-		//Switch Modes
+		//Change le mode entre Clavier et Souris
 			gui.getKeyboard().addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
 				if(gui.getKeyboard().getText() == "KeyBoard") {
 					gui.getKeyboard().setText("Mouse Mode");
 					gui.getSomme().setText("+ / P");
 					gui.getSoustr().setText("- / M");
+					gui.getSquare().setText("² / C");
+					gui.getRacine().setText("√ / R");
+					gui.getClear().setText("<--");
+					gui.getSwap().setText("W");
+					
 				}
 				else {
 					gui.getKeyboard().setText("KeyBoard");
 					gui.getSomme().setText("+");
 					gui.getSoustr().setText("-");
+					gui.getSquare().setText("²");
+					gui.getRacine().setText("√");
+					gui.getClear().setText("Clear");
+					gui.getSwap().setText("Swap");
 				}
 			});
 	}
