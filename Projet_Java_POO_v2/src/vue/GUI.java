@@ -1,14 +1,20 @@
 package vue;
 	
+import java.io.FileInputStream;
+
 import controleur.Controleur;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import modele.Accumulateur;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 
 public class GUI extends Application {
@@ -206,13 +212,24 @@ public class GUI extends Application {
 			
 			
 		    label4 = new Label("0");
+		    label4.setFont(new Font("Arial", 15));
+		    
 		    label3 = new Label("0");
+		    label3.setFont(new Font("Arial", 15));
+		    
 		    label2 = new Label("0");
+		    label2.setFont(new Font("Arial", 15));
+		    
 		    label1 = new Label("0");
+		    label1.setFont(new Font("Arial", 15));
+		    
 		    setLabel0(new Label("Valeur en cours"));
-		    counter = new Label("Nbr. élem. =");
+		    label0.setTextFill(Color.web("grey"));
+		    label0.setFont(new Font("Arial", 15));
+
+		    counter = new Label("Nbr. élement  =");
 		    counter0 = new Label("0");
-		    last_op = new Label("Dern. Op.  =");
+		    last_op = new Label("Dernière Op.  =");
 		    last_op0 = new Label("");
 		    label4.relocate(20, 10);
 		    label3.relocate(20, 50);
@@ -220,15 +237,33 @@ public class GUI extends Application {
 	        label1.relocate(20, 130);
 	        label0.relocate(20, 160);
 	        last_op.relocate(220, 60);
-	        last_op0.relocate(295, 60);
+	        last_op0.relocate(310, 60);
 	        counter.relocate(220, 10);
-	        counter0.relocate(295, 10);
+	        counter0.relocate(310, 10);
 
 	        root.getChildren().addAll(label0, label2, label1, label3, label4, 
 	        		last_op, last_op0, counter, counter0);
 	        
-	        //Import controleur
+	   //Import controleur
 	        Controleur c = new Controleur(this);
+	        
+	   //Import image
+	        //Creating an image 
+	        Image image = new Image(new FileInputStream("src/vue/licorne.png"));  
+	        
+	        //Setting the image view 
+	        ImageView imageView = new ImageView(image); 
+	        
+	        //Setting the position of the image 
+	        imageView.setX(210); 
+	        imageView.setY(80); 
+	        
+	        //setting the fit height and width of the image view 
+	        imageView.setFitHeight(100); 
+	        imageView.setFitWidth(150); 
+	        
+	        root.getChildren().add(imageView);
+	        
 	        
 			stage.setTitle("Calculatrice Polonaise inverse");
 			stage.setScene(scene);

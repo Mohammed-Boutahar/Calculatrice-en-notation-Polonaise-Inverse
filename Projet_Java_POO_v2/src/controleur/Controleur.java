@@ -26,6 +26,33 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 	String L = "";
 	int count = 0;
 	
+	public void Update_Pile() {
+		if(a.p.size()>=4) {
+			gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
+			gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
+			gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
+			gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
+		}
+		if(a.p.size()==3) {
+			gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
+			gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
+			gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
+			gui.getLabel4().setText("0");
+		}
+		if(a.p.size()==2) {
+			gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
+			gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
+			gui.getLabel3().setText("0");
+			gui.getLabel4().setText("0");
+		}
+		if(a.p.size()==1) {
+			gui.getLabel1().setText("Valeur finale  :  " + a.p.get(a.p.size()-1));
+			gui.getLabel2().setText("0");
+			gui.getLabel3().setText("0");
+			gui.getLabel4().setText("0");
+		}
+	}
+	
 	public Controleur(GUI gui) {
 		this.gui=gui;
 //------------------------------------------------------------------------------------//
@@ -105,30 +132,8 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 			else {
 				a.p.push(Double.parseDouble(L));
 				gui.getLabel0().setText("Valeur suivante");
-				if(a.p.size()>=4) {
-					gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-					gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-					gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-					gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-				}
-				if(a.p.size()==3) {
-					gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-					gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-					gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-					gui.getLabel4().setText("0");
-				}
-				if(a.p.size()==2) {
-					gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-					gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-					gui.getLabel3().setText("0");
-					gui.getLabel4().setText("0");
-				}
-				if(a.p.size()==1) {
-					gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-					gui.getLabel2().setText("0");
-					gui.getLabel3().setText("0");
-					gui.getLabel4().setText("0");
-				}
+				
+				Update_Pile();
 				
 				gui.getCounter0().setText("" + a.p.size());
 				System.out.println(a.p.toString());
@@ -139,75 +144,34 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 		
 		//----------------------Operations------------------------------//
 		gui.getSomme().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			if(a.p.size()>1) {
+				gui.getLast_op0().setText("+");
+			}
 			gui.getLabel0().setText("Valeur suivante");
 			
 			a.add();
-			System.out.println(a.p.toString());
-			if(a.p.size()>=4) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-			}
-			if(a.p.size()==3) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==2) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==1) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText("0");
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
+
+			Update_Pile();
 			
 			gui.getCounter0().setText("" + a.p.size());
-			gui.getLast_op0().setText("+");
 		});
 		
 		gui.getSoustr().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			if(a.p.size()>1) {
+				gui.getLast_op0().setText("-");
+			}
 			gui.getLabel0().setText("Valeur suivante");
 			a.sub();
-			System.out.println(a.p.toString());
 			
-			if(a.p.size()>=4) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-			}
-			if(a.p.size()==3) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==2) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==1) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText("0");
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
+			Update_Pile();
 			
 			gui.getCounter0().setText("" + a.p.size());
-			gui.getLast_op0().setText("-");
 		});
 		
 		gui.getDiv().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-
+			if(a.p.size()>1) {
+				gui.getLast_op0().setText("/");
+			}
 			a.div();
 			
 			if((Double)a.p.get(a.p.size()-1) == 0.0) {
@@ -217,136 +181,49 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				gui.getLabel0().setText("Valeur suivante");
 			}
 			
-			System.out.println(a.p.toString());
-			
-			if(a.p.size()>=4) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-			}
-			if(a.p.size()==3) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==2) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==1) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText("0");
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
+			Update_Pile();
 			
 			gui.getCounter0().setText("" + a.p.size());
-			gui.getLast_op0().setText("/");
 		});
 		
 		gui.getMultip().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			if(a.p.size()>1) {
+				gui.getLast_op0().setText("*");
+			}
 			gui.getLabel0().setText("Valeur suivante");
 			a.mult();
+			
 			System.out.println(a.p.toString());
 			
-			if(a.p.size()>=4) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-			}
-			if(a.p.size()==3) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==2) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==1) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText("0");
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
-			
+			Update_Pile();
+
 			gui.getCounter0().setText("" + a.p.size());
-			gui.getLast_op0().setText("*");
 		});
 		
 		
 		gui.getSquare().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			if(a.p.size()>0) {
+				gui.getLast_op0().setText("²");
+				}
 			gui.getLabel0().setText("Valeur suivante");
 			a.square();
 			
-			if(a.p.size()>=4) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-			}
-			if(a.p.size()==3) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==2) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==1) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText("0");
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
+			Update_Pile();
+
 			
 			gui.getCounter0().setText("" + a.p.size());
-			gui.getLast_op0().setText("²");
 		});
 		
 		gui.getRacine().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+			if(a.p.size()>0) {
+				gui.getLast_op0().setText("√");
+				}
 			gui.getLabel0().setText("Valeur suivante");
 			a.racine();
 			
-			if(a.p.size()>=4) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-			}
-			if(a.p.size()==3) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==2) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==1) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText("0");
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
+			Update_Pile();
 			
 			gui.getCounter0().setText("" + a.p.size());
-			gui.getLast_op0().setText("√");
 		});
 		//--------------------------Fin Opérations--------------------------//
 		
@@ -366,7 +243,7 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 		gui.getClear().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			System.out.println("Cleared");
 			a.clear();
-			gui.getLabel0().setText("Valeur suivante");
+			gui.getLabel0().setText("Entrez une valeur");
 			gui.getLabel1().setText("0");
 			gui.getLabel2().setText("0");
 			gui.getLabel3().setText("0");
@@ -389,62 +266,17 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				System.out.println(a.p.toString());
 			}
 			
-			if(a.p.size()>=4) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-			}
-			if(a.p.size()==3) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==2) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==1) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText("0");
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
+			Update_Pile();
+
 		});
 		
 		//signe inverse
 		gui.getInverse().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			System.out.println("inversion du signe de la derniere valeur");
 			a.neg();
-			System.out.println(a.p.toString());
 			
-			if(a.p.size()>=4) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-			}
-			if(a.p.size()==3) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==2) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
-			if(a.p.size()==1) {
-				gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-				gui.getLabel2().setText("0");
-				gui.getLabel3().setText("0");
-				gui.getLabel4().setText("0");
-			}
+			Update_Pile();
+
 		});
 	
 
@@ -542,30 +374,8 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 					else {
 						a.p.push(Double.parseDouble(L));
 						gui.getLabel0().setText("Valeur suivante");
-						if(a.p.size()>=4) {
-							gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-							gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-							gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-							gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-						}
-						if(a.p.size()==3) {
-							gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-							gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-							gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-							gui.getLabel4().setText("0");
-						}
-						if(a.p.size()==2) {
-							gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-							gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-							gui.getLabel3().setText("0");
-							gui.getLabel4().setText("0");
-						}
-						if(a.p.size()==1) {
-							gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-							gui.getLabel2().setText("0");
-							gui.getLabel3().setText("0");
-							gui.getLabel4().setText("0");
-						}
+						Update_Pile();
+
 						System.out.println(a.p.toString());
 						
 						gui.getCounter0().setText("" + a.p.size());
@@ -576,7 +386,7 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				}
 			});
 				
-			//----------------------Operations------------------------------//
+		//----------------------------Operations------------------------------//
 			gui.getKeyboard().addEventHandler(KeyEvent.KEY_PRESSED, e -> {
 				if (e.getCode() == KeyCode.P | e.getCode() == KeyCode.PLUS) {
 					gui.getLabel0().setText("Valeur suivante");
@@ -584,30 +394,8 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 					a.add();
 					
 					System.out.println(a.p.toString());
-					if(a.p.size()>=4) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-						gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-					}
-					if(a.p.size()==3) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-						gui.getLabel4().setText("0");
-					}
-					if(a.p.size()==2) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText("0");
-						gui.getLabel4().setText("0");
-					}
-					if(a.p.size()==1) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText("0");
-						gui.getLabel3().setText("0");
-						gui.getLabel4().setText("0");
-					}
+					Update_Pile();
+
 					
 					gui.getCounter0().setText("" + a.p.size());
 					gui.getLast_op0().setText("+");
@@ -620,30 +408,8 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 					a.sub();
 					System.out.println(a.p.toString());
 					
-					if(a.p.size()>=4) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-						gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-					}
-					if(a.p.size()==3) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-						gui.getLabel4().setText("0");
-					}
-					if(a.p.size()==2) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText("0");
-						gui.getLabel4().setText("0");
-					}
-					if(a.p.size()==1) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText("0");
-						gui.getLabel3().setText("0");
-						gui.getLabel4().setText("0");
-					}
+					Update_Pile();
+
 					
 					gui.getCounter0().setText("" + a.p.size());
 					gui.getLast_op0().setText("-");
@@ -656,30 +422,8 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 					a.div();
 					System.out.println(a.p.toString());
 					
-					if(a.p.size()>=4) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-						gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-					}
-					if(a.p.size()==3) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-						gui.getLabel4().setText("0");
-					}
-					if(a.p.size()==2) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText("0");
-						gui.getLabel4().setText("0");
-					}
-					if(a.p.size()==1) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText("0");
-						gui.getLabel3().setText("0");
-						gui.getLabel4().setText("0");
-					}
+					Update_Pile();
+
 					gui.getCounter0().setText("" + a.p.size());
 					gui.getLast_op0().setText("/");
 				}
@@ -691,39 +435,17 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 					a.mult();
 					System.out.println(a.p.toString());
 					
-					if(a.p.size()>=4) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-						gui.getLabel4().setText(a.p.get(a.p.size()-4).toString());
-					}
-					if(a.p.size()==3) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText(a.p.get(a.p.size()-3).toString());
-						gui.getLabel4().setText("0");
-					}
-					if(a.p.size()==2) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText(a.p.get(a.p.size()-2).toString());
-						gui.getLabel3().setText("0");
-						gui.getLabel4().setText("0");
-					}
-					if(a.p.size()==1) {
-						gui.getLabel1().setText(a.p.get(a.p.size()-1).toString());
-						gui.getLabel2().setText("0");
-						gui.getLabel3().setText("0");
-						gui.getLabel4().setText("0");
-					}
+					Update_Pile();
+
 					
 					gui.getCounter0().setText("" + a.p.size());
 					gui.getLast_op0().setText("*");
 				}
 			});
 			
-			//--------------------------Fin Opérations--------------------------//
+		//------------------------------Fin Opérations--------------------------//
 			
-			//Virgule
+		//Virgule
 			gui.getKeyboard().addEventHandler(KeyEvent.KEY_PRESSED, e -> {
 				if (e.getCode() == KeyCode.COMMA | e.getCode() == KeyCode.PERIOD | e.getCode() == KeyCode.DECIMAL) {
 					if(count == 0 & L!="") {
@@ -737,14 +459,25 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				}
 			});
 		
-		
+			
+		//Switch Modes
+			gui.getKeyboard().addEventHandler(MouseEvent.MOUSE_CLICKED, e ->{
+				if(gui.getKeyboard().getText() == "KeyBoard") {
+					gui.getKeyboard().setText("Mouse Mode");
+					gui.getSomme().setText("+ / P");
+					gui.getSoustr().setText("- / M");
+				}
+				else {
+					gui.getKeyboard().setText("KeyBoard");
+					gui.getSomme().setText("+");
+					gui.getSoustr().setText("-");
+				}
+			});
 	}
 	
 	
 
 	
-	
-
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub
