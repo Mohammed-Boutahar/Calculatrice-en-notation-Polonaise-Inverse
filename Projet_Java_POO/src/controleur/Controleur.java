@@ -65,61 +65,51 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 		gui.getButton0().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 		    L+=0;
 		    gui.getLabel0().setText(L);
-		    System.out.println(L);
 		});
 		
 		gui.getButton1().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			L+=1;
 			gui.getLabel0().setText(L);
-			System.out.println(L);
 		});
 		
 		gui.getButton2().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			L+=2;
 			gui.getLabel0().setText(L);
-			System.out.println(L);
 		});
 		
 		gui.getButton3().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			L+=3;
 			gui.getLabel0().setText(L);
-			System.out.println(L);
 		});
 		
 		gui.getButton4().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			L+=4;
 			gui.getLabel0().setText(L);
-			System.out.println(L);
 		});
 		
 		gui.getButton5().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			L+=5;
 			gui.getLabel0().setText(L);
-			System.out.println(L);
 		});
 		
 		gui.getButton6().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			L+=6;
 			gui.getLabel0().setText(L);
-			System.out.println(L);
 		});
 		
 		gui.getButton7().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			L+=7;
 			gui.getLabel0().setText(L);
-			System.out.println(L);
 		});
 		
 		gui.getButton8().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			L+=8;
 			gui.getLabel0().setText(L);
-			System.out.println(L);
 		});
 		
 		gui.getButton9().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			L+=9;
 			gui.getLabel0().setText(L);
-			System.out.println(L);
 		});
 		//------------------------Fin Numbers----------------------------------//
 		
@@ -170,16 +160,15 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 		});
 		
 		gui.getDiv().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			if(a.p.size()>1) {
-				gui.getLast_op0().setText("/");
-			}
-			a.div();
-			
 			if((Double)a.p.get(a.p.size()-1) == 0.0) {
-				gui.getLabel0().setText("Erreur. On ne peut pas diviser par 0");
+				gui.getLabel0().setText("Op. impossible (0)");
 			}
 			else {
 				gui.getLabel0().setText("Valeur suivante");
+				if(a.p.size()>1) {
+					a.div();
+					gui.getLast_op0().setText("/");
+				}
 			}
 			
 			Update_Pile();
@@ -193,8 +182,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 			}
 			gui.getLabel0().setText("Valeur suivante");
 			a.mult();
-			
-			System.out.println(a.p.toString());
 			
 			Update_Pile();
 
@@ -215,11 +202,19 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 		});
 		
 		gui.getRacine().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-			if(a.p.size()>0) {
-				gui.getLast_op0().setText("√");
-				}
 			gui.getLabel0().setText("Valeur suivante");
 			a.racine();
+			
+			if((Double)a.p.get(a.p.size()-1) < 0.0) {
+				gui.getLabel0().setText("Op. Impossible (-)");
+
+			}
+			else {
+				gui.getLabel0().setText("Valeur suivante");
+				if(a.p.size()>0) {
+					gui.getLast_op0().setText("√");
+					}
+			}
 			
 			Update_Pile();
 			
@@ -252,7 +247,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 			gui.getLast_op0().setText("");
 			L="";
 			count=0;
-			System.out.println(a.p.toString());
 		});
 		
 		//change la position des deux dernieres opérandes
@@ -267,16 +261,16 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 			}
 			
 			Update_Pile();
-
 		});
 		
-		//signe inverse
+		//signe opposé
 		gui.getInverse().addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 			System.out.println("inversion du signe de la derniere valeur");
 			a.neg();
 			
 			Update_Pile();
-
+			
+			System.out.println(a.p.toString());
 		});
 	
 
@@ -290,7 +284,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				if (e.getCode() == KeyCode.NUMPAD0) {
 				    L+=0;
 				    gui.getLabel0().setText(L);
-				    System.out.println(L);
 				}
 			});
 
@@ -298,7 +291,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				if (e.getCode() == KeyCode.NUMPAD1) {
 			    L+=1;
 			    gui.getLabel0().setText(L);
-			    System.out.println(L);
 				}
 			});
 			
@@ -306,7 +298,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				if (e.getCode() == KeyCode.NUMPAD2) {
 			    L+=2;
 			    gui.getLabel0().setText(L);
-			    System.out.println(L);
 				}
 			});
 			
@@ -314,7 +305,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				if (e.getCode() == KeyCode.NUMPAD3) {
 			    L+=3;
 			    gui.getLabel0().setText(L);
-			    System.out.println(L);
 				}
 			});
 			
@@ -322,7 +312,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				if (e.getCode() == KeyCode.NUMPAD4) {
 			    L+=4;
 			    gui.getLabel0().setText(L);
-			    System.out.println(L);
 				}
 			});
 			
@@ -330,7 +319,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				if (e.getCode() == KeyCode.NUMPAD5) {
 			    L+=5;
 			    gui.getLabel0().setText(L);
-			    System.out.println(L);
 				}
 			});
 			
@@ -338,7 +326,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				if (e.getCode() == KeyCode.NUMPAD6) {
 			    L+=6;
 			    gui.getLabel0().setText(L);
-			    System.out.println(L);
 				}
 			});
 			
@@ -346,7 +333,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				if (e.getCode() == KeyCode.NUMPAD7) {
 			    L+=7;
 			    gui.getLabel0().setText(L);
-			    System.out.println(L);
 				}
 			});
 			
@@ -354,7 +340,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				if (e.getCode() == KeyCode.NUMPAD8) {
 			    L+=8;
 			    gui.getLabel0().setText(L);
-			    System.out.println(L);
 				}
 			});
 			
@@ -362,7 +347,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				if (e.getCode() == KeyCode.NUMPAD9) {
 			    L+=9;
 			    gui.getLabel0().setText(L);
-			    System.out.println(L);
 				}
 			});
 			
@@ -396,11 +380,9 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 					gui.getLabel0().setText("Valeur suivante");
 					
 					a.add();
-					
-					System.out.println(a.p.toString());
+
 					Update_Pile();
 
-					
 					gui.getCounter0().setText("" + a.p.size());
 					gui.getLast_op0().setText("+");
 				}
@@ -410,7 +392,6 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 				if (e.getCode() == KeyCode.M | e.getCode() == KeyCode.MINUS) {
 					gui.getLabel0().setText("Valeur suivante");
 					a.sub();
-					System.out.println(a.p.toString());
 					
 					Update_Pile();
 
@@ -421,13 +402,20 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 			
 			gui.getKeyboard().addEventHandler(KeyEvent.KEY_PRESSED, e -> {
 				if (e.getCode() == KeyCode.DIVIDE) {
-					gui.getLabel0().setText("Valeur suivante");
-					a.div();
+					if((Double)a.p.get(a.p.size()-1) == 0.0) {
+						gui.getLabel0().setText("Op. impossible (0)");
+					}
+					else {
+						gui.getLabel0().setText("Valeur suivante");
+						if(a.p.size()>1) {
+							a.div();
+							gui.getLast_op0().setText("/");
+						}
+					}
 					
 					Update_Pile();
 
 					gui.getCounter0().setText("" + a.p.size());
-					gui.getLast_op0().setText("/");
 				}
 			});
 			
@@ -459,11 +447,20 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 			
 			gui.getKeyboard().addEventHandler(KeyEvent.KEY_PRESSED, e -> {
 				if (e.getCode() == KeyCode.R) {
-					if(a.p.size()>0) {
-						gui.getLast_op0().setText("√");
-						}
+					
 					gui.getLabel0().setText("Valeur suivante");
 					a.racine();
+					
+					if((Double)a.p.get(a.p.size()-1) < 0.0) {
+						gui.getLabel0().setText("Op. Impossible (-)");
+
+					}
+					else {
+						gui.getLabel0().setText("Valeur suivante");
+						if(a.p.size()>0) {
+							gui.getLast_op0().setText("√");
+							}
+					}
 					
 					Update_Pile();
 					
@@ -486,10 +483,24 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 			});
 	//------------------------------Fin Opérations--------------------------//
 			
+	
+			
+	//inverse le signe du dernier élement
+			gui.getKeyboard().addEventHandler(KeyEvent.KEY_PRESSED, e -> {
+				if (e.getCode() == KeyCode.I ) {
+					System.out.println("inversion du signe de la derniere valeur");
+					a.neg();
+					
+					Update_Pile();
+					
+					System.out.println(a.p.toString());
+				}
+			});
 			
 	//Virgule
 			gui.getKeyboard().addEventHandler(KeyEvent.KEY_PRESSED, e -> {
-				if (e.getCode() == KeyCode.COMMA | e.getCode() == KeyCode.PERIOD | e.getCode() == KeyCode.DECIMAL) {
+				if (e.getCode() == KeyCode.COMMA | e.getCode() == KeyCode.PERIOD | 
+						e.getCode() == KeyCode.DECIMAL) {
 					if(count == 0 & L!="") {
 						count++;
 						L+=".";
@@ -515,7 +526,8 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 					L="";
 					count=0;
 					System.out.println(a.p.toString());
-				}});
+				}
+			});
 		
 			
 	//Change le mode entre Clavier et Souris
@@ -528,6 +540,7 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 					gui.getRacine().setText("√ / R");
 					gui.getClear().setText("<--");
 					gui.getSwap().setText("W");
+					gui.getInverse().setText("+/- / I");
 					
 				}
 				else {
@@ -538,6 +551,7 @@ public class Controleur implements IView, EventHandler<ActionEvent>, PropertyCha
 					gui.getRacine().setText("√");
 					gui.getClear().setText("Clear");
 					gui.getSwap().setText("Swap");
+					gui.getInverse().setText("+/-");
 				}
 			});
 	}

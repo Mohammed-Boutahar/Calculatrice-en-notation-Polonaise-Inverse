@@ -96,9 +96,10 @@ public class Accumulateur {
 	//effectue la racine carrée du dernier nombre de la pile 
 	public void racine() {
 		if (p.size()>=1){
-			double n1= (Double)p.pop();
-			p.push(Math.sqrt(n1));
+			if((Double)p.get(p.size()-1) >= 0.0) {
+				double n1= (Double)p.pop();
+				p.push(Math.sqrt(n1));
+			}
 		}
 	}
-	
 }

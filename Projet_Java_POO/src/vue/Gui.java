@@ -1,17 +1,20 @@
 package vue;
 
+import modele.Accumulateur;
 import controleur.Controleur;
+
 import javafx.application.Application;
+
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import modele.Accumulateur;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+
 
 
 public class Gui extends Application {
@@ -64,18 +67,28 @@ public class Gui extends Application {
 	public void start(Stage stage) {
 		try {
 			
+			/*Nous avons décidé de travailler dans tout le projet avec une Pane AnchorPane en vue
+			de la fléxibilité qu'elle offre, car nous avons beaucoup de petits élements à 
+			controler et a positionner dans notre interface*/
 			AnchorPane root = new AnchorPane();
 			
 			Scene scene = new Scene(root,350,400);
 			
-			  //Import image
-	        //Creating an image 
-	        Image image1 = new Image("https://assets.stickpng.com/images/580b57fbd9996e24bc43c077.png");  
+	//Import image from Internet
+		//Creating an image 
+			//Licorne
+	        Image image1 = new Image("https://assets.stickpng.com/images/580b57fbd9996e24bc43c077.png");
+	        
+	        //Paillettes
 	        Image image2 = new Image("https://www.pngplay.com/wp-content/uploads/13/Glitter-Background-PNG-Image.png");
+	        
+	        //rectangle vide
 	        Image image3 = new Image("https://images.vexels.com/media/users/3/139256/isolated/lists/d238146fc3a2b6b70c792b5c55d91584-rectangle-shape-stroke.png"); 
 	        Image image4 = new Image("https://images.vexels.com/media/users/3/139256/isolated/lists/d238146fc3a2b6b70c792b5c55d91584-rectangle-shape-stroke.png"); 
 	        Image image5 = new Image("https://images.vexels.com/media/users/3/139256/isolated/lists/d238146fc3a2b6b70c792b5c55d91584-rectangle-shape-stroke.png"); 
 	        Image image6 = new Image("https://images.vexels.com/media/users/3/139256/isolated/lists/d238146fc3a2b6b70c792b5c55d91584-rectangle-shape-stroke.png"); 
+	        
+	        //rectangle plein
 	        Image image7 = new Image("http://xlogo.tuxfamily.org/eo/manual-eo/img69.png"); 
 	        Image image8 = new Image("http://xlogo.tuxfamily.org/eo/manual-eo/img69.png"); 
 
@@ -90,7 +103,7 @@ public class Gui extends Application {
 	        ImageView imageView7 = new ImageView(image7);
 	        ImageView imageView8 = new ImageView(image8);
 	        
-	        //Setting the position of the image 
+	        //Setting the position of the images
 	        imageView1.setX(210); 
 	        imageView1.setY(80); 
 	        imageView2.setX(0); 
@@ -109,7 +122,7 @@ public class Gui extends Application {
 	        imageView8.setX(180); 
 	        imageView8.setY(-145); 
 	
-	        //setting the fit height and width of the image view 
+	        //setting the fit height and width of the image view
 	        imageView1.setFitHeight(100); 
 	        imageView1.setFitWidth(150); 
 	        imageView2.setFitHeight(400); 
@@ -128,10 +141,11 @@ public class Gui extends Application {
 	        imageView8.setFitHeight(350); 
 	        imageView8.setFitWidth(3); 
 
-	        
-	        root.getChildren().addAll(imageView1, imageView2, imageView3, 
-	        		imageView4, imageView5, imageView6, imageView7, imageView8);
+	        //Ajout des images au root
+	        root.getChildren().addAll(imageView1, imageView2, imageView3, imageView4, 
+	        						imageView5, imageView6, imageView7, imageView8);
 			
+	        //Instanciation des boutons
 			button0 = new Button("0");	
 			button1 = new Button("1");
 			button2 = new Button("2");
@@ -151,6 +165,8 @@ public class Gui extends Application {
 			racine = new Button("√");
 			inverse = new Button("+/-");
 			swap = new Button("Swap");
+			
+			//style des boutons avec JavaFX
 			button_style(button0);
 			button_style(button1);
 			button_style(button2);
@@ -181,8 +197,7 @@ public class Gui extends Application {
 			buttonPush = new Button("<>");
 			buttonPush.setStyle("-fx-font: 15 arial; -fx-font-weight: bold; -fx-base: #C71585;");
 
-
-			
+			//Ajout des boutons
 			root.getChildren().addAll(button0, button1, button2,button3,button4,button5,button6,button7,button8,button9,div,inverse,
 					multip,somme,soustr,buttonPush,virgule, clear, swap, keyboard, square, racine);
 
@@ -297,10 +312,13 @@ public class Gui extends Application {
 		    AnchorPane.setLeftAnchor(racine, 280.0);
 		    AnchorPane.setRightAnchor(racine, 10.0);
 
+		    
+		    //Couleur de l'arrière plan 
 		    root.setStyle("-fx-background-color: #FFEDF5");
 			
 			Font standard_font = new Font("Arial", 15);
 		    
+			//Instanciation des Labels avec leur style
 		    label4 = new Label("0");
 		    label4.setFont(standard_font);
 		    
@@ -327,6 +345,7 @@ public class Gui extends Application {
 		    last_op0 = new Label("");
 		    last_op0.setFont(standard_font);
 		    
+		    //Positionnement des Labels
 		    label4.relocate(20, 10);
 		    label3.relocate(20, 50);
 	        label2.relocate(20, 90);
@@ -337,6 +356,7 @@ public class Gui extends Application {
 	        counter.relocate(200, 10);
 	        counter0.relocate(310, 10);
 
+	        //Ajout des Labels au root
 	        root.getChildren().addAll(label0, label2, label1, label3, label4, 
 	        		last_op, last_op0, counter, counter0);
 	        
@@ -345,7 +365,7 @@ public class Gui extends Application {
 	   //Import controleur
 	        Controleur c = new Controleur(this);
 	        
-
+	   //Style du Frame
 			stage.setTitle("Calculatrice Polonaise inverse");
 			stage.setScene(scene);
 			stage.getIcons().add(image1);
@@ -377,7 +397,7 @@ public class Gui extends Application {
 
 
 
-	//-------------------Getter et Setters pour les Labels----------------------//
+//---------------------Getter et Setters pour les Labels------------------------//
 	public Label getLabel0() {
 		return label0;
 	}
